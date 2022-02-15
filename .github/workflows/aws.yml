@@ -35,7 +35,8 @@ jobs:
       - name: Set Version
         id: version
         run: |
-          echo "::set-output name=value::$( pwsh ../version-tool.ps1 next-dev-version )"
+          echo "directory $( pwd  )"
+          echo "::set-output name=value::$( pwsh ./.github/version-tool.ps1 next-dev-version )"
 
       - name: Create a tag
         id: tag
