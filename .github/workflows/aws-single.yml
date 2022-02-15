@@ -22,7 +22,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build, tag, and push image to Amazon ECR
-        id: ecr_tag
+        id: build-ecr
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: portal-comercios
@@ -34,7 +34,7 @@ jobs:
       - name: Create a tag
         id: tag
         run: |
-          echo "Creating tag from git workflow ecr_tag:${{ ecr_tag.env.IMAGE_TAG }} RUN_NUMBER:${{ env.GITHUB_RUN_NUMBER }} RUN_ID: ${{ env.GITHUB_RUN_NUMBER }}"
+          echo "Creating tag from git workflow ecr_tag:${{ build-ecr.env.IMAGE_TAG }} RUN_NUMBER:${{ env.GITHUB_RUN_NUMBER }} RUN_ID: ${{ env.GITHUB_RUN_NUMBER }}"
           git tag -a 1.0.1 -f -m "Create tag from git workflow RUN_NUMBER:${{ secrets.GITHUB_RUN_NUMBER }} RUN_ID: ${{ secrets.GITHUB_RUN_ID }}"
           git push --tags
 
