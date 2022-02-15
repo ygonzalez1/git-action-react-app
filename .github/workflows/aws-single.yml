@@ -34,7 +34,8 @@ jobs:
       - name: Create a tag
         id: tag
         run: |
+          echo "Creating tag from git workflow RUN_NUMBER:${{ secrets.GITHUB_RUN_NUMBER }} RUN_ID: ${{ secrets.GITHUB_RUN_ID }}"
           git tag -l 1.${{ secrets.GITHUB_RUN_NUMBER }}.0
-          git tag -a -f -m "Create tag from git workflow ${{ secrets.GITHUB_RUN_NUMBER }}"
+          git tag -a -f -m "Create tag from git workflow RUN_NUMBER:${{ secrets.GITHUB_RUN_NUMBER }} RUN_ID: ${{ secrets.GITHUB_RUN_ID }}"
           git push
 
