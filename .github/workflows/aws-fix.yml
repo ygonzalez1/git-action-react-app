@@ -15,7 +15,7 @@ jobs:
         run: |
           git config --global user.name "ygonzalez1"
           git config --global user.email "ygonzalez.work@gmail.com"
-          ::set-output name=new_tag::git tag --column --sort -tag | awk '{print $1}' | awk '{split($0,a,"."); print a[1]"."a[2]"."a[3]+1}'
+          echo ::set-output name=new_tag::$(git tag --column --sort -tag | awk '{print $1}' | awk '{split($0,a,"."); print a[1]"."a[2]"."a[3]+1}')
 
       - name: Create Git Tag
         id: tag
