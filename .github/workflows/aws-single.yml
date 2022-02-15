@@ -33,12 +33,11 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-      - name: Create a tag
+      - name: Create Git Tag
         id: tag
         run: |
           git config --global user.name "ygonzalez1"
           git config --global user.email "ygonzalez.work@gmail.com"
-          echo "Creating tag from git workflow - RUN_NUMBER:${{ env.GITHUB_RUN_NUMBER }} RUN_ID: ${{ env.GITHUB_RUN_NUMBER }}"
           git tag -a ${{ env.TAG }} -f -m "Create tag from git workflow RUN_NUMBER:${{ secrets.GITHUB_RUN_NUMBER }} RUN_ID: ${{ secrets.GITHUB_RUN_ID }}"
           git push --tags
 
